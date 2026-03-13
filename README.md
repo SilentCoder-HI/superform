@@ -62,7 +62,7 @@ function LoginForm() {
 
       <div>
         <input type="password" {...register("password")} placeholder="Password" />
-        {errors.password && <span>{errors.errors}</span>}
+        {errors.password && <span>{errors.password}</span>}
       </div>
 
       <button type="submit" disabled={isSubmitting}>
