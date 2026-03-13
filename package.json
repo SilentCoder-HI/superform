@@ -1,5 +1,5 @@
 {
-  "name": "superform",
+  "name": "@silentcoderhi/superform",
   "version": "1.0.0",
   "description": "A lightning-fast, TypeScript-first validation and form state management library for React.",
   "type": "module",
