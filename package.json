@@ -1,5 +1,5 @@
 {
-  "name": "superform",
+  "name": "@silentcoderhi/superform",
   "version": "1.0.0",
   "description": "A lightning-fast, TypeScript-first validation and form state management library for React.",
   "type": "module",
@@ -36,6 +36,9 @@
   "scripts": {
     "build": "tsup",
     "test": "tsx test.ts",
+    "lint": "echo \"Linting...\"",
+    "format": "echo \"Formatting...\"",
+    "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -45,13 +48,22 @@
     "typescript",
     "react",
     "hooks",
-    "zod-like"
+    "zod-like",
+    "form-validation",
+    "lightweight"
   ],
-  "author": "",
+  "author": "SilentCoder-HI",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/SilentCoder-HI/superform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SilentCoder-HI/superform/issues"
+  },
+  "homepage": "https://github.com/SilentCoder-HI/superform#readme",
+  "engines": {
+    "node": ">=18.0.0"
   },
   "peerDependencies": {
     "react": ">=18.0.0"
