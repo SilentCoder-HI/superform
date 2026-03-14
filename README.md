@@ -34,10 +34,8 @@ Check out the full documentation for detailed guides and API reference:
 
 ```bash
 # Using npm
-npm install superform
+npm install @silentcoderhi/superform
 
-# Using yarn
-yarn add superform
 ```
 
 ## 🚀 Quick Start
@@ -45,12 +43,12 @@ yarn add superform
 ### 1. Define your Schema
 
 ```typescript
-import { s } from "superform";
+import { superform } from "@silentcoderhi/superform";
 
-const loginSchema = s.object({
-  email: s.string().email().min(5),
-  password: s.string().min(8),
-  rememberMe: s.boolean().true(),
+const loginSchema = superform.object({
+  email: superform.string().email().min(5),
+  password: superform.string().min(8),
+  rememberMe: superform.boolean().true(),
 });
 
 // Infer types automatically!
@@ -97,7 +95,7 @@ function LoginForm() {
 #### String Schema
 
 ```typescript
-s.string()
+superform.string()
   .email() // Must be a valid email
   .min(length) // Minimum characters
   .max(length) // Maximum characters
@@ -107,7 +105,7 @@ s.string()
 #### Number Schema
 
 ```typescript
-s.number()
+superform.number()
   .min(value) // Minimum value
   .max(value) // Maximum value
   .async(asyncFn); // Custom async validation
@@ -116,7 +114,7 @@ s.number()
 #### Array Schema
 
 ```typescript
-s.array(s.string()) // Array of strings
+superform.array(superform.string()) // Array of strings
   .min(length) // Minimum elements
   .max(length); // Maximum elements
 ```
@@ -124,8 +122,8 @@ s.array(s.string()) // Array of strings
 #### Object Schema
 
 ```typescript
-s.object({
-  username: s.string(),
+superform.object({
+  username: superform.string(),
   age: s.number(),
 });
 ```
