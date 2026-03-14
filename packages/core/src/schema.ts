@@ -1,75 +1,89 @@
 import { BaseSchema } from "./base.js";
-import type { ValidationRule, Schema, ValidationResult } from "./types.js";
+import type { Schema, ValidationResult } from "./types.js";
 
 export class StringSchema extends BaseSchema<string> {
-  email() {
-    return this.addRule((value) =>
-      /\S+@\S+\.\S+/.test(value) ? null : "Invalid email"
-    );
+  email(msg = "Invalid email") {
+    return this.addRule((value) => {
+      if (typeof value !== "string") return msg;
+      return /\S+@\S+\.\S+/.test(value) ? null : msg;
+    });
   }
 
-  min(length: number) {
-    return this.addRule((value) =>
-      value.length >= length ? null : `Minimum ${length} characters`
-    );
+  min(length: number, msg?: string) {
+    return this.addRule((value) => {
+      if (typeof value !== "string") return msg || `Minimum ${length} characters`;
+      return value.length >= length ? null : msg || `Minimum ${length} characters`;
+    });
   }
 
-  max(length: number) {
-    return this.addRule((value) =>
-      value.length <= length ? null : `Maximum ${length} characters`
-    );
+  max(length: number, msg?: string) {
+    return this.addRule((value) => {
+      if (typeof value !== "string") return msg || `Maximum ${length} characters`;
+      return value.length <= length ? null : msg || `Maximum ${length} characters`;
+    });
   }
 
   async(fn: (value: string) => Promise<string | null>) {
-    return this.addRule(fn);
+    return this.addRule(async (value) => {
+      if (typeof value !== "string") return "Invalid value";
+      return fn(value);
+    });
   }
 }
 
 export class NumberSchema extends BaseSchema<number> {
   min(min: number) {
-    return this.addRule((value) =>
-      value >= min ? null : `Must be at least ${min}`
-    );
+    return this.addRule((value) => {
+      if (typeof value !== "number") return `Must be at least ${min}`;
+      return value >= min ? null : `Must be at least ${min}`;
+    });
   }
 
   max(max: number) {
-    return this.addRule((value) =>
-      value <= max ? null : `Must be at most ${max}`
-    );
+    return this.addRule((value) => {
+      if (typeof value !== "number") return `Must be at most ${max}`;
+      return value <= max ? null : `Must be at most ${max}`;
+    });
   }
 
   async(fn: (value: number) => Promise<string | null>) {
-    return this.addRule(fn);
+    return this.addRule(async (value) => {
+      if (typeof value !== "number") return "Invalid value";
+      return fn(value);
+    });
   }
 }
 
 export class BooleanSchema extends BaseSchema<boolean> {
-  true() {
-    return this.addRule((value) =>
-      value === true ? null : "Must be true"
-    );
+  true(msg?: string) {
+    return this.addRule((value) => {
+      if (typeof value !== "boolean") return msg || "Must be true";
+      return value === true ? null : msg || "Must be true";
+    });
   }
 
-  false() {
-    return this.addRule((value) =>
-      value === false ? null : "Must be false"
-    );
+  false(msg?: string) {
+    return this.addRule((value) => {
+      if (typeof value !== "boolean") return msg || "Must be false";
+      return value === false ? null : msg || "Must be false";
+    });
   }
 
   async(fn: (value: boolean) => Promise<string | null>) {
-    return this.addRule(fn);
+    return this.addRule(async (value) => {
+      if (typeof value !== "boolean") return "Invalid value";
+      return fn(value);
+    });
   }
 }
 
-export class ArraySchema<T = any> extends BaseSchema<T[]> {
+export class ArraySchema<T> extends BaseSchema<T[]> {
   constructor(private elementSchema?: Schema<T>) {
     super();
   }
 
   async validate(value: any): Promise<ValidationResult<T[]>> {
-    if (!Array.isArray(value)) {
-      return { success: false, errors: "Must be an array" };
-    }
+    if (!Array.isArray(value)) return { success: false, errors: "Must be an array" };
 
     if (this.elementSchema) {
       const errors: Record<number, any> = {};
@@ -83,23 +97,23 @@ export class ArraySchema<T = any> extends BaseSchema<T[]> {
         }
       }
 
-      if (hasErrors) {
-        return { success: false, errors };
-      }
+      if (hasErrors) return { success: false, errors };
     }
 
     return super.validate(value);
   }
 
-  min(length: number) {
-    return this.addRule((value) =>
-      value.length >= length ? null : `Minimum ${length} elements`
-    );
+  min(length: number, msg?: string) {
+    return this.addRule((value) => {
+      if (!Array.isArray(value)) return msg || `Minimum ${length} elements`;
+      return value.length >= length ? null : msg || `Minimum ${length} elements`;
+    });
   }
 
-  max(length: number) {
-    return this.addRule((value) =>
-      value.length <= length ? null : `Maximum ${length} elements`
-    );
+  max(length: number, msg?: string) {
+    return this.addRule((value) => {
+      if (!Array.isArray(value)) return msg || `Maximum ${length} elements`;
+      return value.length <= length ? null : msg || `Maximum ${length} elements`;
+    });
   }
 }

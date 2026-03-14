@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import type { Schema, Infer } from "../../core/src/types.js";
 
 export function useForm<S extends Schema<any>>(schema: S) {
@@ -7,47 +7,54 @@ export function useForm<S extends Schema<any>>(schema: S) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const register = (name: keyof FormData) => ({
-    name,
-    value: values[name] || "",
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      setValues((prev) => ({ ...prev, [name]: e.target.value }));
-    },
-  });
+  const register = (name: keyof FormData) => {
+    const val = values[name];
+    return {
+      name: name as string,
+      value: typeof val === "boolean" ? "" : ((val || "") as string),
+      checked: typeof val === "boolean" ? val : false,
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+        setValues((prev) => ({ ...prev, [name]: value as any }));
+      },
+    };
+  };
 
   const handleSubmit = useCallback(
-    (onSubmit: (data: FormData) => void | Promise<void>) =>
-      async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setErrors({});
+    (onSubmit: (data: FormData) => void | Promise<void>) => async (e: React.FormEvent) => {
+      e.preventDefault();
+      setIsSubmitting(true);
+      setErrors({});
 
-        const result = await schema.validate(values);
-        if (!result.success) {
-          // Map errors from ValidationResult to state
-          // For now, if it's a simple string error from an object validator, we try to parse it
-          // In a real structured error system, this would be cleaner
-          const firstError = Array.isArray(result.errors) ? result.errors[0] : result.errors;
-          const errorMsg = typeof firstError === 'string' ? firstError : JSON.stringify(firstError);
-          
-          const [field, message] = errorMsg.includes(":") 
-            ? errorMsg.split(":").map((s: string) => s.trim()) 
-            : ["root", errorMsg];
-            
-            setErrors({ [field as string]: message || errorMsg });
-          setIsSubmitting(false);
-          return;
+      const result = await schema.validate(values);
+      console.log(result);
+
+      if (!result.success) {
+        if (result.errors && typeof result.errors === "object") {
+          // If errors are an object, set all fields
+          setErrors(result.errors as Record<string, string>);
+        } else {
+          // Fallback for unexpected error format
+          setErrors({ root: JSON.stringify(result.errors) });
         }
+        setIsSubmitting(false);
+        return;
+      }
 
-        try {
-          await onSubmit(result.data);
-        } finally {
-
-          setIsSubmitting(false);
-        }
-      },
-    [schema, values]
+      try {
+        await onSubmit(result.data);
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [schema, values],
   );
+
+  const reset = useCallback(() => {
+    setValues({});
+    setErrors({});
+    setIsSubmitting(false);
+  }, []);
 
   return {
     register,
@@ -55,5 +62,6 @@ export function useForm<S extends Schema<any>>(schema: S) {
     values,
     errors,
     isSubmitting,
+    reset,
   };
 }

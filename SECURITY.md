@@ -30,6 +30,7 @@ We take the security of SuperForm seriously. If you discover a security vulnerab
 ### Scope
 
 The following are in scope:
+
 - Core validation engine (`@silentcoderhi/superform`)
 - React integration (`@silentcoderhi/superform/react`)
 - Official documentation and examples

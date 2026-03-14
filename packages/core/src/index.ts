@@ -2,7 +2,7 @@ import { StringSchema, NumberSchema, BooleanSchema, ArraySchema } from "./schema
 import { ObjectSchema } from "./objectSchema.js";
 import type { Schema } from "./types.js";
 
-export const s = {
+export const superform = {
   string: () => new StringSchema(),
   number: () => new NumberSchema(),
   boolean: () => new BooleanSchema(),
@@ -11,7 +11,7 @@ export const s = {
 };
 
 // Alias for convenience
-export const superform = s;
+export const superformNode = superform;
 
 export * from "./types.js";
 export * from "./schema.js";

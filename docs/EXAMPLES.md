@@ -15,15 +15,15 @@ const schema = s.object({
 
 export function LoginForm() {
   const { register, handleSubmit, errors } = useForm(schema);
-  
+
   return (
     <form onSubmit={handleSubmit(console.log)}>
       <input {...register("email")} />
       {errors.email && <span>{errors.email}</span>}
-      
+
       <input type="password" {...register("password")} />
       {errors.password && <span>{errors.password}</span>}
-      
+
       <button>Submit</button>
     </form>
   );
@@ -44,7 +44,7 @@ const schema = s.object({
 });
 
 // Access fields using dot notation in register
-<input {...register("user.firstName")} />
+<input {...register("user.firstName")} />;
 ```
 
 ## Array Validation
@@ -59,10 +59,13 @@ const schema = s.object({
 
 ```tsx
 const schema = s.object({
-  username: s.string().min(3).async(async (val) => {
-    const isAvailable = await checkAvailability(val);
-    return isAvailable ? null : "Username is already taken";
-  }),
+  username: s
+    .string()
+    .min(3)
+    .async(async (val) => {
+      const isAvailable = await checkAvailability(val);
+      return isAvailable ? null : "Username is already taken";
+    }),
 });
 ```
 
@@ -73,6 +76,6 @@ const { register } = useForm(schema, {
   defaultValues: {
     email: "user@example.com",
     rememberMe: true,
-  }
+  },
 });
 ```

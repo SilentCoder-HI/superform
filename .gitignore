@@ -1,8 +1,21 @@
 # Dependencies
 node_modules/
+# Node modules
+node_modules/
+packages/core/node_modules/
+packages/react/node_modules/
+playground/node_modules/
 
+# Optional build outputs
+dist/
+*.log
 # Build output
 dist/
+packages/*/dist/
+
+# Playground builds
+playground/.next/
+playground/dist/
 
 # Environment files
 .env
@@ -40,3 +53,6 @@ coverage/
 # Temporary files
 tmp/
 temp/
+
+# Build caches
+.turbo/

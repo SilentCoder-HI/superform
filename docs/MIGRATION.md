@@ -4,7 +4,7 @@ This document helps you migrate between major versions of SuperForm.
 
 ## Migrating to v1.0.0
 
-Since v1.0.0 is the first stable release, no migration path is required from previous experimental versions. 
+Since v1.0.0 is the first stable release, no migration path is required from previous experimental versions.
 
 ### Key Changes in v1.0.0
 
@@ -21,11 +21,13 @@ Migration steps for future major versions will be added here. We follow [Semanti
 ### Staying Up to Date
 
 To check for the latest version:
+
 ```bash
 npm outdated @silentcoderhi/superform
 ```
 
 To update:
+
 ```bash
 npm install @silentcoderhi/superform@latest
 ```

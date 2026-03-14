@@ -1,9 +1,9 @@
 import { createContext, useContext } from "react";
 
 export interface FormContextValue {
-  values: Record<string, any>;
+  values: Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
   errors: Record<string, string>;
-  register: (name: string) => any;
+  register: (name: string) => any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export const FormContext = createContext<FormContextValue | null>(null);

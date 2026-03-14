@@ -5,7 +5,7 @@
 [![license](https://img.shields.io/github/license/SilentCoder-HI/superform.svg)](LICENSE)
 [![bundle size](https://img.shields.io/bundlephobia/minzip/@silentcoderhi/superform)](https://bundlephobia.com/package/@silentcoderhi/superform)
 
-A lightning-fast, TypeScript-first validation and form state management library for React. 
+A lightning-fast, TypeScript-first validation and form state management library for React.
 
 SuperForm provides a Zod-like schema builder with a powerful validation engine, seamlessly integrated with React hooks to manage form state, errors, and submission with ease.
 
@@ -79,7 +79,7 @@ function LoginForm() {
 
       <div>
         <input type="password" {...register("password")} placeholder="Password" />
-        {errors.password && <span>{errors.password}</span>}
+        {errors.password && <span>{errors.errors}</span>}
       </div>
 
       <button type="submit" disabled={isSubmitting}>
@@ -95,41 +95,47 @@ function LoginForm() {
 ### Schema Builder (`s`)
 
 #### String Schema
+
 ```typescript
 s.string()
-  .email()           // Must be a valid email
-  .min(length)       // Minimum characters
-  .max(length)       // Maximum characters
-  .async(asyncFn)    // Custom async validation
+  .email() // Must be a valid email
+  .min(length) // Minimum characters
+  .max(length) // Maximum characters
+  .async(asyncFn); // Custom async validation
 ```
 
 #### Number Schema
+
 ```typescript
 s.number()
-  .min(value)        // Minimum value
-  .max(value)        // Maximum value
-  .async(asyncFn)    // Custom async validation
+  .min(value) // Minimum value
+  .max(value) // Maximum value
+  .async(asyncFn); // Custom async validation
 ```
 
 #### Array Schema
+
 ```typescript
-s.array(s.string())  // Array of strings
-  .min(length)       // Minimum elements
-  .max(length)       // Maximum elements
+s.array(s.string()) // Array of strings
+  .min(length) // Minimum elements
+  .max(length); // Maximum elements
 ```
 
 #### Object Schema
+
 ```typescript
 s.object({
   username: s.string(),
   age: s.number(),
-})
+});
 ```
 
 ### React Hooks
 
 #### `useForm(schema)`
+
 The primary hook for managing form state.
+
 - `register(name)`: Returns props for input binding.
 - `handleSubmit(onSubmit)`: Form submission handler with validation.
 - `errors`: Object containing field errors.
@@ -137,6 +143,7 @@ The primary hook for managing form state.
 - `isSubmitting`: Boolean indicating submission status.
 
 #### `useField(name)`
+
 Access specific field state within a `FormContext`.
 
 ## 🧪 Testing

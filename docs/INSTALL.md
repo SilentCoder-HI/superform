@@ -13,16 +13,19 @@ SuperForm is designed to be lightweight and easy to integrate into any React pro
 You can install SuperForm using your favorite package manager:
 
 ### npm
+
 ```bash
 npm install @silentcoderhi/superform
 ```
 
 ### yarn
+
 ```bash
 yarn add @silentcoderhi/superform
 ```
 
 ### pnpm
+
 ```bash
 pnpm add @silentcoderhi/superform
 ```
@@ -52,11 +55,13 @@ SuperForm is built with TypeScript and provide full type safety out of the box. 
 ## Importing SuperForm
 
 ### Core Validation
+
 ```typescript
 import { s } from "@silentcoderhi/superform";
 ```
 
 ### React Hooks
+
 ```typescript
 import { useForm, useField } from "@silentcoderhi/superform/react";
 ```
