@@ -1,84 +1,68 @@
 {
   "name": "@silentcoderhi/superform",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "private": false,
   "description": "A lightning-fast, TypeScript-first validation and form state management library for React.",
-  "type": "module",
-  "main": "./dist/core/index.cjs",
-  "module": "./dist/core/index.js",
-  "types": "./dist/core/index.d.ts",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/core/index.d.ts",
-        "default": "./dist/core/index.js"
-      },
-      "require": {
-        "types": "./dist/core/index.d.cts",
-        "default": "./dist/core/index.cjs"
-      }
-    },
-    "./react": {
-      "import": {
-        "types": "./dist/react/index.d.ts",
-        "default": "./dist/react/index.js"
-      },
-      "require": {
-        "types": "./dist/react/index.d.cts",
-        "default": "./dist/react/index.cjs"
-      }
-    }
-  },
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
-  ],
-  "scripts": {
-    "build": "tsup",
-    "test": "tsx test.ts",
-    "lint": "echo \"Linting...\"",
-    "format": "echo \"Formatting...\"",
-    "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
-  },
-  "keywords": [
-    "form",
-    "validation",
-    "schema",
-    "typescript",
-    "react",
-    "hooks",
-    "zod-like",
-    "form-validation",
-    "lightweight"
-  ],
-  "author": "SilentCoder-HI",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/SilentCoder-HI/superform.git"
   },
-  "bugs": {
-    "url": "https://github.com/SilentCoder-HI/superform/issues"
-  },
-  "homepage": "https://github.com/SilentCoder-HI/superform#readme",
+  "license": "MIT",
+  "author": "Hussnain",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "playground"
+  ],
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18"
   },
-  "peerDependencies": {
-    "react": ">=18.0.0"
-  },
-  "peerDependenciesMeta": {
-    "react": {
-      "optional": true
-    }
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "dev": "npm run dev --workspaces --parallel",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf node_modules dist",
+    "changeset": "changeset",
+    "release": "changeset publish",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "@types/react": "^19.2.14",
-    "react": "^19.2.4",
-    "tsup": "^8.5.1",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "vitest": "^4.1.0"
+    "@changesets/cli": "^2.27.1",
+    "@commitlint/cli": "^19.0.3",
+    "@commitlint/config-conventional": "^19.0.3",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.34.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "globals": "^17.4.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
   }
 }

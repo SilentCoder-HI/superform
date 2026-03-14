@@ -14,6 +14,7 @@ SuperForm is a monorepo-lite, split into two main areas:
 The engine uses a chainable schema builder pattern. Each schema type (String, Number, etc.) inherits from a `BaseSchema` and implements a `validate()` method.
 
 ### How it works:
+
 1. **Schema Definition**: You define a schema using `s.object({ ... })`.
 2. **Registration**: `useForm` maps these schemas to form fields.
 3. **Validation Flow**:
@@ -24,6 +25,7 @@ The engine uses a chainable schema builder pattern. Each schema type (String, Nu
 ## React Integration Layer
 
 SuperForm uses a "controlled-uncontrolled hybrid" approach:
+
 - We use internal state to track values and errors.
 - `register()` provides `onChange` and `onBlur` handlers to sync input values with the form state.
 - Ref-based access allows for optimized focus management and direct DOM interaction when needed.
@@ -31,6 +33,7 @@ SuperForm uses a "controlled-uncontrolled hybrid" approach:
 ## Type System
 
 SuperForm leverages TypeScript's advanced features (Mapped Types, Conditional Types) to provide:
+
 - **Automatic Inference**: `typeof schema._type` extracts the data type.
 - **Autocomplete**: Field paths are string literals generated from the schema keys.
 - **Type Safety**: `setValue` and `register` are type-checked against the schema.

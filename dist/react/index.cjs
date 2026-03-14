@@ -33,13 +33,18 @@ function useForm(schema) {
   const [values, setValues] = (0, import_react.useState)({});
   const [errors, setErrors] = (0, import_react.useState)({});
   const [isSubmitting, setIsSubmitting] = (0, import_react.useState)(false);
-  const register = (name) => ({
-    name,
-    value: values[name] || "",
-    onChange: (e) => {
-      setValues((prev) => ({ ...prev, [name]: e.target.value }));
-    }
-  });
+  const register = (name) => {
+    const val = values[name];
+    return {
+      name,
+      value: typeof val === "boolean" ? "" : val || "",
+      checked: typeof val === "boolean" ? val : false,
+      onChange: (e) => {
+        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+        setValues((prev) => ({ ...prev, [name]: value }));
+      }
+    };
+  };
   const handleSubmit = (0, import_react.useCallback)(
     (onSubmit) => async (e) => {
       e.preventDefault();

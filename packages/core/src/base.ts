@@ -1,4 +1,4 @@
-import type { Schema, ValidationRule, ValidationResult, Infer } from "./types.js";
+import type { ValidationResult } from "./types.js";
 
 export abstract class BaseSchema<T> {
   protected rules: ((value: T) => string | null | Promise<string | null>)[] = [];

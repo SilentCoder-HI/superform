@@ -35,7 +35,7 @@ export function LoginForm() {
   const onSubmit = async (data: LoginData) => {
     console.log("Valid data:", data);
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   };
 
   return (
