@@ -124,7 +124,7 @@ superform.array(superform.string()) // Array of strings
 ```typescript
 superform.object({
   username: superform.string(),
-  age: s.number(),
+  age: superform.number(),
 });
 ```
 
