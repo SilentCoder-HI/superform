@@ -1,8 +1,25 @@
 # SuperForm 🚀
 
+[![CI](https://github.com/SilentCoder-HI/superform/actions/workflows/ci.yml/badge.svg)](https://github.com/SilentCoder-HI/superform/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/@silentcoderhi/superform.svg)](https://www.npmjs.com/package/@silentcoderhi/superform)
+[![license](https://img.shields.io/github/license/SilentCoder-HI/superform.svg)](LICENSE)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/@silentcoderhi/superform)](https://bundlephobia.com/package/@silentcoderhi/superform)
+
 A lightning-fast, TypeScript-first validation and form state management library for React. 
 
 SuperForm provides a Zod-like schema builder with a powerful validation engine, seamlessly integrated with React hooks to manage form state, errors, and submission with ease.
+
+## 📖 Documentation
+
+Check out the full documentation for detailed guides and API reference:
+
+- [**Installation**](docs/INSTALL.md)
+- [**Quick Start**](docs/QUICK_START.md)
+- [**API Reference**](docs/API.md)
+- [**Examples**](docs/EXAMPLES.md)
+- [**Migration Guide**](docs/MIGRATION.md)
+- [**Architecture**](docs/ARCHITECTURE.md)
+- [**FAQ & Troubleshooting**](docs/FAQ.md)
 
 ## ✨ Features
 
