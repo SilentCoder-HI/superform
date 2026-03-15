@@ -9,6 +9,9 @@ async function runValidationTest(name: string, result: any) {
     } else {
         const error = typeof result === "object" ? result.errors : result
         console.log(`❌ ${name} INVALID → ${JSON.stringify(error)}`)
+        console.log(`❌ ${name} INVALID → ${JSON.stringify(error)}`)
+        console.log(`❌ ${name} INVALID → ${JSON.stringify(error)}`)
+        console.log(`❌ ${name} INVALID → ${JSON.stringify(error)}`)
     }
 }
 
