@@ -1,5 +1,5 @@
 {
-  "name": "@superform/react",
+  "name": "@silentcoderhi/superform-react",
   "version": "1.0.1",
   "description": "React hooks and components for SuperForm",
   "type": "module",
@@ -8,18 +8,18 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     }
   },
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --external react,@superform/core",
+    "build": "tsup src/index.ts --format cjs,esm --dts --external react,@silentcoderhi/superform-core",
     "type-check": "tsc --noEmit"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
-    "@superform/core": "*"
+    "@silentcoderhi/superform-core": "*"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

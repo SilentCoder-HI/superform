@@ -14,6 +14,9 @@
     "packages/*",
     "playground"
   ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "engines": {
     "node": ">=18"
   },
@@ -43,17 +46,30 @@
     "eslint-plugin-react": "^7.34.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "globals": "^17.4.0",
-    "husky": "^9.0.11",
+    "husky": "^9.1.7",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "tsup": "^8.0.2",
     "typescript": "^5.3.3"
   },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "types": "./packages/core/dist/index.d.ts",
+      "import": "./packages/core/dist/index.js",
+      "require": "./packages/core/dist/index.cjs"
+    },
+    "./reactcore": {
+      "types": "./packages/core/dist/index.d.ts",
+      "import": "./packages/core/dist/index.js",
+      "require": "./packages/core/dist/index.cjs"
+    },
+    "./react": {
+      "types": "./packages/react/dist/index.d.ts",
+      "import": "./packages/react/dist/index.js",
+      "require": "./packages/react/dist/index.cjs"
     }
   },
   "lint-staged": {
@@ -64,5 +80,10 @@
     "*.{json,md}": [
       "prettier --write"
     ]
-  }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
 }

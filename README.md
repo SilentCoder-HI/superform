@@ -1,25 +1,8 @@
 # SuperForm 🚀
 
-[![CI](https://github.com/SilentCoder-HI/superform/actions/workflows/ci.yml/badge.svg)](https://github.com/SilentCoder-HI/superform/actions/workflows/ci.yml)
-[![npm version](https://img.shields.io/npm/v/@silentcoderhi/superform.svg)](https://www.npmjs.com/package/@silentcoderhi/superform)
-[![license](https://img.shields.io/github/license/SilentCoder-HI/superform.svg)](LICENSE)
-[![bundle size](https://img.shields.io/bundlephobia/minzip/@silentcoderhi/superform)](https://bundlephobia.com/package/@silentcoderhi/superform)
-
-A lightning-fast, TypeScript-first validation and form state management library for React.
+A lightning-fast, TypeScript-first validation and form state management library for React. 
 
 SuperForm provides a Zod-like schema builder with a powerful validation engine, seamlessly integrated with React hooks to manage form state, errors, and submission with ease.
-
-## 📖 Documentation
-
-Check out the full documentation for detailed guides and API reference:
-
-- [**Installation**](docs/INSTALL.md)
-- [**Quick Start**](docs/QUICK_START.md)
-- [**API Reference**](docs/API.md)
-- [**Examples**](docs/EXAMPLES.md)
-- [**Migration Guide**](docs/MIGRATION.md)
-- [**Architecture**](docs/ARCHITECTURE.md)
-- [**FAQ & Troubleshooting**](docs/FAQ.md)
 
 ## ✨ Features
 
@@ -34,8 +17,10 @@ Check out the full documentation for detailed guides and API reference:
 
 ```bash
 # Using npm
-npm install @silentcoderhi/superform
+npm install superform
 
+# Using yarn
+yarn add superform
 ```
 
 ## 🚀 Quick Start
@@ -43,12 +28,12 @@ npm install @silentcoderhi/superform
 ### 1. Define your Schema
 
 ```typescript
-import { superform } from "@silentcoderhi/superform";
+import { s } from "superform";
 
-const loginSchema = superform.object({
-  email: superform.string().email().min(5),
-  password: superform.string().min(8),
-  rememberMe: superform.boolean().true(),
+const loginSchema = s.object({
+  email: s.string().email().min(5),
+  password: s.string().min(8),
+  rememberMe: s.boolean().true(),
 });
 
 // Infer types automatically!
@@ -77,7 +62,7 @@ function LoginForm() {
 
       <div>
         <input type="password" {...register("password")} placeholder="Password" />
-        {errors.password && <span>{errors.errors}</span>}
+        {errors.password && <span>{errors.password}</span>}
       </div>
 
       <button type="submit" disabled={isSubmitting}>
@@ -93,47 +78,41 @@ function LoginForm() {
 ### Schema Builder (`s`)
 
 #### String Schema
-
 ```typescript
-superform.string()
-  .email() // Must be a valid email
-  .min(length) // Minimum characters
-  .max(length) // Maximum characters
-  .async(asyncFn); // Custom async validation
+s.string()
+  .email()           // Must be a valid email
+  .min(length)       // Minimum characters
+  .max(length)       // Maximum characters
+  .async(asyncFn)    // Custom async validation
 ```
 
 #### Number Schema
-
 ```typescript
-superform.number()
-  .min(value) // Minimum value
-  .max(value) // Maximum value
-  .async(asyncFn); // Custom async validation
+s.number()
+  .min(value)        // Minimum value
+  .max(value)        // Maximum value
+  .async(asyncFn)    // Custom async validation
 ```
 
 #### Array Schema
-
 ```typescript
-superform.array(superform.string()) // Array of strings
-  .min(length) // Minimum elements
-  .max(length); // Maximum elements
+s.array(s.string())  // Array of strings
+  .min(length)       // Minimum elements
+  .max(length)       // Maximum elements
 ```
 
 #### Object Schema
-
 ```typescript
-superform.object({
-  username: superform.string(),
-  age: superform.number(),
-});
+s.object({
+  username: s.string(),
+  age: s.number(),
+})
 ```
 
 ### React Hooks
 
 #### `useForm(schema)`
-
 The primary hook for managing form state.
-
 - `register(name)`: Returns props for input binding.
 - `handleSubmit(onSubmit)`: Form submission handler with validation.
 - `errors`: Object containing field errors.
@@ -141,7 +120,6 @@ The primary hook for managing form state.
 - `isSubmitting`: Boolean indicating submission status.
 
 #### `useField(name)`
-
 Access specific field state within a `FormContext`.
 
 ## 🧪 Testing

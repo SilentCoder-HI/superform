@@ -1,23 +1,28 @@
-// app/page.tsx
 "use client";
-
-import { toast, Toaster } from "react-hot-toast";
+import React from "react";
 import { useForm } from "../../packages/react/src/index.js";
 import { superform } from "../../packages/core/src/index.js";
+// app/page.tsx
+
+import { toast, Toaster } from "react-hot-toast";
 
 const userSchema = superform.object({
-  name: superform.string().min(4, "Name must be at least 4 characters").max(50),
+  name: superform.string().min(4, "Name must be at least 4 characters").max(10, "Name must be at most 10 characters"),
 
   email: superform.string().email("Please enter a valid email").min(5, "Email is too short"),
 
   password: superform.string().min(6, "Password must be at least 6 characters"),
+  acceptTerms: superform.boolean().true("You must accept the terms and conditions"),
 });
 
 export default function SignupPage() {
+
+
   const { register, handleSubmit, errors, isSubmitting, reset } = useForm(userSchema);
 
   const onSubmit = async (_data: Record<string, unknown>) => {
-    console.log(_data, errors);
+
+
     const loadingToast = toast.loading("Creating your account...");
 
     try {
@@ -144,6 +149,22 @@ export default function SignupPage() {
                   <p style={{ color: "#ef4444", fontSize: "13px" }}>{errors.password}</p>
                 )}
               </div>
+
+              <div style={{ marginBottom: "18px" }}>
+                <label style={{ fontSize: "14px", display: "block", marginBottom: "6px" }}>
+                  Accept terms and conditions
+                </label>
+                <input
+                  type="checkbox"
+                  {...register("acceptTerms")}
+                  style={{ marginRight: "10px" }}
+                />
+
+                {errors.acceptTerms && (
+                  <p style={{ color: "#ef4444", fontSize: "13px" }}>You must accept the terms and conditions</p>
+                )}
+              </div>
+
 
               <button
                 type="submit"

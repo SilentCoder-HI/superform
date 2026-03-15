@@ -6,15 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "type-check": "tsc --noEmit"
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hot-toast": "^2.6.0",
-    "@superform/core": "*",
-    "@superform/react": "*"
+    "react-hot-toast": "^2.6.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

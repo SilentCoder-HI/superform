@@ -16,9 +16,8 @@ type Infer<T> = T extends Schema<infer U> ? U : never;
 
 declare function useForm<S extends Schema<any>>(schema: S): {
     register: (name: keyof Infer<S>) => {
-        name: string;
-        value: string;
-        checked: boolean | (Partial<Infer<S>>[keyof Infer<S>] & true);
+        name: keyof Infer<S>;
+        value: string | NonNullable<Partial<Infer<S>>[keyof Infer<S>]>;
         onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     };
     handleSubmit: (onSubmit: (data: Infer<S>) => void | Promise<void>) => (e: React.FormEvent) => Promise<void>;

@@ -1,5 +1,5 @@
 {
-  "name": "@superform/core",
+  "name": "@silentcoderhi/superform-core",
   "version": "1.0.1",
   "description": "Core validation engine for SuperForm",
   "type": "module",

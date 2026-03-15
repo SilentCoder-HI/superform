@@ -27,7 +27,6 @@ export function useForm<S extends Schema<any>>(schema: S) {
       setErrors({});
 
       const result = await schema.validate(values);
-      console.log(result);
 
       if (!result.success) {
         if (result.errors && typeof result.errors === "object") {
