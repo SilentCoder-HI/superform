@@ -1,6 +1,6 @@
 {
   "name": "@silentcoderhi/superform",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "private": false,
   "description": "A lightning-fast, TypeScript-first validation and form state management library for React.",
   "repository": {
@@ -18,7 +18,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
+    "build": "tsup",
     "test": "npm run test --workspaces --if-present",
     "dev": "npm run dev --workspaces --parallel",
     "lint": "eslint .",
@@ -65,8 +65,8 @@
     }
   },
   "types": "./dist/core/index.d.ts",
-  "main": "./dist/core/index.cjs",
-  "module": "./dist/core/index.js",
+  "main": "./dist/core/index.js",
+  "module": "./dist/core/index.mjs",
   "files": [
     "dist",
     "README.md",
