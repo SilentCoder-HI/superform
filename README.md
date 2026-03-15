@@ -1,6 +1,6 @@
 # SuperForm 🚀
 
-A lightning-fast, TypeScript-first validation and form state management library for React. 
+A lightning-fast, TypeScript-first validation and form state management library for React.
 
 SuperForm provides a Zod-like schema builder with a powerful validation engine, seamlessly integrated with React hooks to manage form state, errors, and submission with ease.
 
@@ -17,10 +17,10 @@ SuperForm provides a Zod-like schema builder with a powerful validation engine, 
 
 ```bash
 # Using npm
-npm install superform
+npm install @silentcoderhi/superform
 
 # Using yarn
-yarn add superform
+yarn add @silentcoderhi/superform
 ```
 
 ## 🚀 Quick Start
@@ -28,12 +28,12 @@ yarn add superform
 ### 1. Define your Schema
 
 ```typescript
-import { s } from "superform";
+import { superform } from "@silentcoderhi/superform/core";
 
-const loginSchema = s.object({
-  email: s.string().email().min(5),
-  password: s.string().min(8),
-  rememberMe: s.boolean().true(),
+const loginSchema = superform.object({
+  email: superform.string().email().min(5),
+  password: superform.string().min(8),
+  rememberMe: superform.boolean().true(),
 });
 
 // Infer types automatically!
@@ -43,7 +43,7 @@ type LoginData = typeof loginSchema._type;
 ### 2. Use in React
 
 ```tsx
-import { useForm } from "superform/react";
+import { useForm } from "@silentcoderhi/superform/react";
 import { loginSchema } from "./schema";
 
 function LoginForm() {
@@ -75,11 +75,11 @@ function LoginForm() {
 
 ## 🛠 API Reference
 
-### Schema Builder (`s`)
+### Schema Builder (`superform`)
 
 #### String Schema
 ```typescript
-s.string()
+superform.string()
   .email()           // Must be a valid email
   .min(length)       // Minimum characters
   .max(length)       // Maximum characters
@@ -88,7 +88,7 @@ s.string()
 
 #### Number Schema
 ```typescript
-s.number()
+superform.number()
   .min(value)        // Minimum value
   .max(value)        // Maximum value
   .async(asyncFn)    // Custom async validation
@@ -96,16 +96,16 @@ s.number()
 
 #### Array Schema
 ```typescript
-s.array(s.string())  // Array of strings
+superform.array(superform.string())  // Array of strings
   .min(length)       // Minimum elements
   .max(length)       // Maximum elements
 ```
 
 #### Object Schema
 ```typescript
-s.object({
-  username: s.string(),
-  age: s.number(),
+superform.object({
+  username: superform.string(),
+  age: superform.number(),
 })
 ```
 
