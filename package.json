@@ -14,9 +14,6 @@
     "packages/*",
     "playground"
   ],
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
   "engines": {
     "node": ">=18"
   },
@@ -57,16 +54,24 @@
   },
   "exports": {
     ".": {
-      "types": "./packages/core/dist/index.d.ts",
-      "import": "./packages/core/dist/index.js",
-      "require": "./packages/core/dist/index.cjs"
+      "types": "./dist/core/index.d.ts",
+      "import": "./dist/core/index.js",
+      "require": "./dist/core/index.cjs"
     },
     "./react": {
-      "types": "./packages/react/dist/index.d.ts",
-      "import": "./packages/react/dist/index.js",
-      "require": "./packages/react/dist/index.cjs"
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js",
+      "require": "./dist/react/index.cjs"
     }
   },
+  "types": "./dist/core/index.d.ts",
+  "main": "./dist/core/index.cjs",
+  "module": "./dist/core/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "lint-staged": {
     "*.{ts,tsx}": [
       "eslint --fix",
@@ -75,10 +80,5 @@
     "*.{json,md}": [
       "prettier --write"
     ]
-  },
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
-  ]
+  }
 }
