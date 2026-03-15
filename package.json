@@ -61,11 +61,6 @@
       "import": "./packages/core/dist/index.js",
       "require": "./packages/core/dist/index.cjs"
     },
-    "./reactcore": {
-      "types": "./packages/core/dist/index.d.ts",
-      "import": "./packages/core/dist/index.js",
-      "require": "./packages/core/dist/index.cjs"
-    },
     "./react": {
       "types": "./packages/react/dist/index.d.ts",
       "import": "./packages/react/dist/index.js",
