@@ -8,6 +8,7 @@ export default defineConfig([
     outDir: "dist",
     clean: true,
     sourcemap: true,
+    bundle: true,
   },
   {
     entry: { "react/index": "packages/react/src/index.ts" },
@@ -16,6 +17,7 @@ export default defineConfig([
     outDir: "dist",
     clean: false,
     sourcemap: true,
-    external: ["react", "superform"],
+    external: ["react", "@silentcoderhi/superform-core"],
+    bundle: true,
   },
 ]);
