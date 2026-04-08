@@ -4,7 +4,7 @@ This document outlines the planned features and improvements for SuperForm.
 
 > **Note**: This roadmap is subject to change based on community feedback and priorities. Feel free to [open a discussion](https://github.com/SilentCoder-HI/superform/discussions) to suggest features or vote on existing proposals.
 
-## ✅ v1.0.0 — Foundation (Current)
+## ✅ v1.0.0 — Foundation
 
 - [x] Core validation engine
 - [x] Schema builder with Zod-like API (`s.string()`, `s.number()`, `s.boolean()`, `s.object()`, `s.array()`)
@@ -14,17 +14,17 @@ This document outlines the planned features and improvements for SuperForm.
 - [x] Dual ESM/CJS builds
 - [x] Zero runtime dependencies
 
-## 🔜 v1.1.0 — Validation Enhancements
+## ✅ v1.1.0 — Validation Enhancements (Current)
 
-- [ ] Custom error messages per rule (`.min(5, "Too short")`)
-- [ ] `.optional()` and `.nullable()` modifiers
-- [ ] `.refine()` for custom validation logic
-- [ ] `.transform()` for data transformation during validation
-- [ ] `.enum()` schema for union string types
-- [ ] `.literal()` schema for exact values
-- [ ] `s.union()` for combining schemas
+- [x] Custom error messages per rule (`.min(5, "Too short")`)
+- [x] `.optional()` and `.nullable()` modifiers
+- [x] `.refine()` for custom validation logic
+- [x] `.transform()` for data transformation during validation
+- [x] `.enum()` schema for union string types
+- [x] `.literal()` schema for exact values
+- [x] `s.union()` for combining schemas
 
-## 📅 v1.2.0 — Advanced Features
+## 🔜 v1.2.0 — Advanced Features
 
 - [ ] Conditional validation (`.when()`)
 - [ ] Cross-field validation (password confirmation, etc.)

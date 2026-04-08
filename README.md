@@ -94,6 +94,21 @@ superform.number()
   .async(asyncFn)    // Custom async validation
 ```
 
+#### Modifier Methods (All Schemas)
+```typescript
+superform.string().optional() // Returns string | undefined
+superform.number().nullable() // Returns number | null
+superform.string().refine(v => v !== 'admin', { message: 'Reserved' })
+superform.string().transform(v => v.trim().toLowerCase())
+```
+
+#### Enums, Literals, and Unions
+```typescript
+superform.enum(['draft', 'published']) // Inferred as 'draft' | 'published'
+superform.literal('ADMIN')             // Strictly 'ADMIN'
+superform.union(superform.string(), superform.number()) // string | number
+```
+
 #### Array Schema
 ```typescript
 superform.array(superform.string())  // Array of strings

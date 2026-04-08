@@ -1,7 +1,12 @@
 import { BaseSchema } from "./base.js";
-import type { Schema, ValidationResult } from "./types.js";
+import type { Schema, ValidationResult, Infer } from "./types.js";
 
 export class StringSchema extends BaseSchema<string> {
+  constructor() {
+    super();
+    this.addRule((value) => (typeof value === "string" ? null : "Must be a string"));
+  }
+
   email(msg = "Invalid email") {
     return this.addRule((value) => {
       if (typeof value !== "string") return msg;
@@ -32,6 +37,11 @@ export class StringSchema extends BaseSchema<string> {
 }
 
 export class NumberSchema extends BaseSchema<number> {
+  constructor() {
+    super();
+    this.addRule((value) => (typeof value === "number" ? null : "Must be a number"));
+  }
+
   min(min: number) {
     return this.addRule((value) => {
       if (typeof value !== "number") return `Must be at least ${min}`;
@@ -55,6 +65,11 @@ export class NumberSchema extends BaseSchema<number> {
 }
 
 export class BooleanSchema extends BaseSchema<boolean> {
+  constructor() {
+    super();
+    this.addRule((value) => (typeof value === "boolean" ? null : "Must be a boolean"));
+  }
+
   true(msg?: string) {
     return this.addRule((value) => {
       if (typeof value !== "boolean") return msg || "Must be true";
@@ -115,5 +130,49 @@ export class ArraySchema<T> extends BaseSchema<T[]> {
       if (!Array.isArray(value)) return msg || `Maximum ${length} elements`;
       return value.length <= length ? null : msg || `Maximum ${length} elements`;
     });
+  }
+}
+
+export class EnumSchema<T extends (string | number)> extends BaseSchema<T> {
+  constructor(private allowedValues: T[]) {
+    super();
+  }
+
+  async validate(value: any): Promise<ValidationResult<T>> {
+    if (!this.allowedValues.includes(value)) {
+      return { success: false, errors: `Must be one of: ${this.allowedValues.join(", ")}` };
+    }
+    return super.validate(value);
+  }
+}
+
+export class LiteralSchema<T> extends BaseSchema<T> {
+  constructor(private literalValue: T) {
+    super();
+  }
+
+  async validate(value: any): Promise<ValidationResult<T>> {
+    if (value !== this.literalValue) {
+      return { success: false, errors: `Must be strictly equal to ${String(this.literalValue)}` };
+    }
+    return super.validate(value);
+  }
+}
+
+export class UnionSchema<T extends Schema<any>[]> extends BaseSchema<Infer<T[number]>> {
+  constructor(private schemas: T) {
+    super();
+  }
+
+  async validate(value: any): Promise<ValidationResult<Infer<T[number]>>> {
+    const errorMessages = [];
+    for (const schema of this.schemas) {
+      const result = await schema.validate(value);
+      if (result.success) {
+        return super.validate(result.data);
+      }
+      errorMessages.push(result.errors);
+    }
+    return { success: false, errors: `Invalid union. Errors from branches: ${JSON.stringify(errorMessages)}` };
   }
 }
